@@ -1,0 +1,10 @@
+{
+  "name": "bank_webhook_handler",
+  "packageManager": "yarn@3.6.4",
+  "dependencies": {
+    "@repo/db": "*",
+    "@types/express": "^5.0.0",
+    "esbuild": "^0.24.2",
+    "express": "^4.21.2"
+  }
+}
