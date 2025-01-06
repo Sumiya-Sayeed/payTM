@@ -23,7 +23,7 @@ export const GET = async () => {
       data: {
         email: 'asd@example.com',
         name: 'John Doe',
-        number: '1234567890', // Ensure this is unique
+        number: '1111111111', // Ensure this is unique
         password: 'yourSecurePassword'
       }
     });
