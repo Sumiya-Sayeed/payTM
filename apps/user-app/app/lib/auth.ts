@@ -43,7 +43,7 @@ export const authOptions = {
         }
 
         try {
-          console.log('Creating user', credentials, hashedPassword);
+          console.log('Creating user1', credentials, hashedPassword);
           const user = await db.user.create({
             data: {
               number: credentials.phone,
