@@ -1,34 +1,44 @@
-const { resolve } = require("node:path");
+const { resolve } = require('node:path');
 
-const project = resolve(process.cwd(), "tsconfig.json");
+const project = resolve(process.cwd(), 'tsconfig.json');
 
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
-  extends: ["eslint:recommended", "prettier", "eslint-config-turbo"],
-  plugins: ["only-warn"],
+  root: true,
+  extends: ['eslint:recommended', 'prettier', 'eslint-config-turbo'],
+  plugins: ['only-warn'],
   globals: {
     React: true,
-    JSX: true,
+    JSX: true
   },
   env: {
-    node: true,
+    node: true // For Node.js environments
   },
   settings: {
-    "import/resolver": {
+    'import/resolver': {
       typescript: {
-        project,
-      },
-    },
+        project
+      }
+    }
   },
   ignorePatterns: [
-    // Ignore dotfiles
-    ".*.js",
-    "node_modules/",
-    "dist/",
+    '.*.js', // Ignore dotfiles
+    'node_modules/',
+    'dist/'
   ],
   overrides: [
     {
-      files: ["*.js?(x)", "*.ts?(x)"],
-    },
-  ],
+      files: ['*.ts', '*.tsx'], // Only apply to TypeScript files
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        project
+      },
+      rules: {
+        '@typescript-eslint/no-unused-vars': [
+          'warn',
+          { argsIgnorePattern: '^_' }
+        ]
+      }
+    }
+  ]
 };

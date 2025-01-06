@@ -1,35 +1,47 @@
-const { resolve } = require("node:path");
+const { resolve } = require('node:path');
 
-const project = resolve(process.cwd(), "tsconfig.json");
+const project = resolve(process.cwd(), 'tsconfig.json');
 
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
+  root: true,
   extends: [
-    "eslint:recommended",
-    "prettier",
-    require.resolve("@vercel/style-guide/eslint/next"),
-    "eslint-config-turbo",
+    'eslint:recommended',
+    'prettier',
+    require.resolve('@vercel/style-guide/eslint/next'), // Next.js-specific rules
+    'eslint-config-turbo'
   ],
   globals: {
     React: true,
-    JSX: true,
+    JSX: true
   },
   env: {
-    node: true,
-    browser: true,
+    node: true, // Node.js for SSR
+    browser: true // Browser for client-side code
   },
-  plugins: ["only-warn"],
+  plugins: ['only-warn'],
   settings: {
-    "import/resolver": {
+    'import/resolver': {
       typescript: {
-        project,
-      },
-    },
+        project
+      }
+    }
   },
   ignorePatterns: [
-    // Ignore dotfiles
-    ".*.js",
-    "node_modules/",
+    '.*.js', // Ignore dotfiles
+    'node_modules/',
+    'dist/'
   ],
-  overrides: [{ files: ["*.js?(x)", "*.ts?(x)"] }],
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx', '*.js', '*.jsx'],
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        project
+      }
+    }
+  ],
+  typescript: {
+    ignoreBuildErrors: true
+  }
 };

@@ -2,10 +2,23 @@
   "name": "@repo/store",
   "version": "1.0.0",
   "private": true,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts"
+  },
   "dependencies": {
     "recoil": "^0.7.7"
   },
-  "exports": {
-    "./balance": "./src/hooks/useBalance"
+  "peerDependencies": {
+    "react": "^18.0.0"
   }
 }
